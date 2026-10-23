@@ -1,0 +1,46 @@
+package com.jotaro.server.netty.impl;
+
+import com.alibaba.fastjson2.JSON;
+import com.jotaro.pojo.req.RpcRequest;
+import com.jotaro.pojo.resp.RpcResponse;
+import com.jotaro.server.common.ServerProvider;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import java.lang.reflect.Method;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * @description:
+ * @author: yuecaiheng.jotaro
+ * @date: 2026/10/23 01:59
+ */
+@Slf4j
+public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
+    private ServerProvider serverProvider;
+    @Override
+    protected void channelRead0(final ChannelHandlerContext ctx, final RpcRequest rpcRequest) throws Exception {
+        RpcResponse rpcResponse = getResponse(rpcRequest);
+        ctx.writeAndFlush(rpcResponse);
+        ctx.close();
+    }
+
+    @Override
+    public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
+        cause.printStackTrace();
+        ctx.close();
+    }
+
+    private RpcResponse getResponse(RpcRequest rpcRequest){
+        String interfaceName = rpcRequest.getInterfaceName();
+        Object service = serverProvider.getService(interfaceName);
+        Method method = null;
+        try{
+            method = service.getClass().getMethod(rpcRequest.getMethodName(),rpcRequest.getParamsType());
+            Object invoke = method.invoke(service, rpcRequest.getParams());
+            return RpcResponse.success(invoke);
+        }catch (Exception e){
+            log.error("WorkThread.getResponse error, rpcRequest:{}", JSON.toJSONString(rpcRequest),e);
+            return RpcResponse.fail("服务端异常");
+        }
+    }
+}

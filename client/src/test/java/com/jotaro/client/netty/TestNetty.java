@@ -1,8 +1,8 @@
 package com.jotaro.client.netty;
 
 import com.alibaba.fastjson2.JSON;
-import com.jotaro.client.netty.testservice.User;
-import com.jotaro.client.netty.testservice.UserService;
+import com.jotaro.api.User;
+import com.jotaro.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -19,6 +19,7 @@ public class TestNetty {
         NettyClientProxy proxy = new NettyClientProxy("127.0.0.1",9999);
         UserService userService = proxy.getProxy(UserService.class);
         User user = userService.getUserById(1);
+        System.out.println("user:{}" + JSON.toJSONString(user));
         log.info("user:{}", JSON.toJSONString(user));
     }
 

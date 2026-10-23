@@ -1,5 +1,6 @@
 package com.jotaro.client.netty;
 
+import com.jotaro.client.RpcClient;
 import com.jotaro.pojo.req.RpcRequest;
 import com.jotaro.pojo.resp.RpcResponse;
 import java.lang.reflect.InvocationHandler;
@@ -40,7 +41,9 @@ public class NettyClientProxy implements InvocationHandler {
                 .build();
 
         RpcResponse rpcResponse = this.ioClient.sendRequest(rpcRequest);
-
+        if (rpcResponse == null) {
+            throw new IllegalStateException("rpc response is null, request=" + method.getName());
+        }
         return rpcResponse.getData();
     }
 

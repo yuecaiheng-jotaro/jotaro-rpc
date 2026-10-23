@@ -1,5 +1,6 @@
 package com.jotaro.pojo.resp;
 
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,7 +11,9 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class RpcResponse {
+public class RpcResponse implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer code;
 

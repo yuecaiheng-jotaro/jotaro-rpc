@@ -27,4 +27,10 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RpcResponse>
         // 关闭当前channel,短链接模式
         ctx.channel().close();
     }
+
+    @Override
+    public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
+        cause.printStackTrace();
+        ctx.close();
+    }
 }

@@ -1,7 +1,7 @@
 package com.jotaro.server.simple.impl;
 
 import com.jotaro.server.common.ServerProvider;
-import com.jotaro.server.simple.RpcServer;
+import com.jotaro.server.RpcServer;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;

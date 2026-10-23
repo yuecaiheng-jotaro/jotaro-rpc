@@ -1,4 +1,4 @@
-package com.jotaro.client.netty;
+package com.jotaro.client;
 
 import com.jotaro.pojo.req.RpcRequest;
 import com.jotaro.pojo.resp.RpcResponse;

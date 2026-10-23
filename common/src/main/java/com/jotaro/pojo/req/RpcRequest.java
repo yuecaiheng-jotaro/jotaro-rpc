@@ -1,5 +1,6 @@
 package com.jotaro.pojo.req;
 
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,7 +11,9 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class RpcRequest {
+public class RpcRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 接口名称

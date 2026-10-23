@@ -37,7 +37,7 @@ public class NettyRpcServer implements RpcServer {
                     .childHandler(new NettyServerInitializer(serverProvider));
             // 同步堵塞
             ChannelFuture channelFuture=serverBootstrap.bind(port).sync();
-            // 死循环监听
+            // 死循环监听，服务启动后阻塞到这里，等待channel完全close掉再往下执行
             channelFuture.channel().closeFuture().sync();
         }catch (Exception e){
             log.error("netty server start fail!!!",e);

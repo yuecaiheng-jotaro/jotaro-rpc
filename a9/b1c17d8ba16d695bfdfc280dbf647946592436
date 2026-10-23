@@ -1,0 +1,40 @@
+client/src/main/java/com/jotaro/client/netty/NettyClientProxy.java
+  s_8a203a1a3ca099::t_9e92e444a99baa 44-46
+client/src/main/java/com/jotaro/client/netty/impl/NettyClientHandler.java
+  s_8a203a1a3ca099::t_2e32a3327c286b 30-35
+client/src/test/java/com/jotaro/client/netty/TestNetty.java
+  s_8a203a1a3ca099::t_247d5f56dc46af 4-5
+common/src/main/java/com/jotaro/pojo/req/RpcRequest.java
+  s_8a203a1a3ca099::t_3dd49cd3bfbb5f 3,14-16
+common/src/main/java/com/jotaro/api/UserService.java
+  s_8a203a1a3ca099::t_616aa762f98689 1-12
+common/src/main/java/com/jotaro/api/User.java
+  s_8a203a1a3ca099::t_0dfe6ac5c96ca4 1-26
+common/src/main/java/com/jotaro/pojo/resp/RpcResponse.java
+  s_8a203a1a3ca099::t_5eb8ef4bb07ae6 3,14-16
+server/src/main/java/com/jotaro/server/netty/impl/NettyRpcServerHandler.java
+  s_8a203a1a3ca099::t_4bff4e8328351d 7
+  s_8a203a1a3ca099::t_48725196cd8688 40-43
+  s_8a203a1a3ca099::t_0f3c1926a7f1f0 26-27
+client/src/main/java/com/jotaro/client/netty/impl/NettyRpcClient.java
+  s_8a203a1a3ca099::t_857ef9128740db 54-60
+  s_8a203a1a3ca099::t_190b8a33d66d9e 9
+server/src/test/java/com/jotaro/server/TestRpcServer.java
+  s_8a203a1a3ca099::t_ac2a1a986aaf43 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "a9b1c17d8ba16d695bfdfc280dbf647946592436",
+  "prompts": {},
+  "sessions": {
+    "s_8a203a1a3ca099": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "5b6f914d-3702-4971-a5db-cca7780e123e",
+        "model": "default"
+      },
+      "human_author": "yuecaiheng.jotaro <yuecaiheng.jotaro@jd.com>"
+    }
+  }
+}

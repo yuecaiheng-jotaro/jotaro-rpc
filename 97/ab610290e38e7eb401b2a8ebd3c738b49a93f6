@@ -1,0 +1,29 @@
+register/src/main/java/com/jotaro/register/zk/discovery/ZKServiceCenter.java
+  s_8f9e0f02f3992b::t_c54946c06ccda4 28,43
+  s_8f9e0f02f3992b::t_f2d66abcd1a2b3 5,8
+  s_8f9e0f02f3992b::t_132140f471267b 27,29-34,41-42,45-48
+register/src/main/java/com/jotaro/register/zk/common/ZKUtils.java
+  s_8f9e0f02f3992b::t_19f61b3c6847de 33
+register/src/main/java/com/jotaro/register/zk/ZKClientFactory.java
+  s_8f9e0f02f3992b::t_37161266acbdda 18,22,25-26
+register/src/main/java/com/jotaro/register/zk/regist/ZKServiceRegister.java
+  s_8f9e0f02f3992b::t_fa9c74b5545dda 9
+  s_8f9e0f02f3992b::t_e5d013283e2ebc 28
+  s_8f9e0f02f3992b::t_42d58d1c43691f 27,29-34,41,43,49,58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "97ab610290e38e7eb401b2a8ebd3c738b49a93f6",
+  "prompts": {},
+  "sessions": {
+    "s_8f9e0f02f3992b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "35f49249-b6de-4812-a84f-5c4421e9e868",
+        "model": "default"
+      },
+      "human_author": "yuecaiheng.jotaro <yuecaiheng.jotaro@jd.com>"
+    }
+  }
+}

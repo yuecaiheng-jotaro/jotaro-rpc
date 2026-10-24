@@ -17,7 +17,7 @@ public class TestRpcServer {
     @Test
     public void testServer(){
         UserService userService = new UserServiceImpl();
-        ServerProvider serverProvider = new ServerProvider();
+        ServerProvider serverProvider = new ServerProvider("127.0.0.1",9999);
         serverProvider.provideServiceInterface(userService);
 
         RpcServer rpcServer = new NettyRpcServer(serverProvider);

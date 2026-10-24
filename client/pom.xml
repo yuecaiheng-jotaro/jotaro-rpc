@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jotaro</groupId>
     <artifactId>JRpc</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>${common.version}</version>
   </parent>
   <artifactId>client</artifactId>
   <name>Archetype - client</name>
@@ -15,7 +15,12 @@
     <dependency>
       <groupId>org.jotaro</groupId>
       <artifactId>common</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jotaro</groupId>
+      <artifactId>register</artifactId>
+      <version>1.0.3-SNAPSHOT</version>
     </dependency>
   </dependencies>
 

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
     <groupId>org.jotaro</groupId>
     <artifactId>JRpc</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>${common.version}</version>
   <packaging>pom</packaging>
   <name>Archetype - JRpc</name>
     <url>http://maven.apache.org</url>
@@ -12,7 +12,17 @@
     <module>client</module>
     <module>server</module>
     <module>common</module>
+    <module>register</module>
   </modules>
+
+  <properties>
+    <common.version>1.0.3-SNAPSHOT</common.version>
+
+
+  </properties>
+
+
+
   <dependencies>
       <dependency>
         <groupId>org.projectlombok</groupId>
@@ -56,6 +66,25 @@
       <artifactId>netty-all</artifactId>
       <version>4.1.51.Final</version>
       <scope>compile</scope>
+    </dependency>
+
+    <!-- zk操作器  -->
+    <dependency>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-recipes</artifactId>
+      <version>5.2.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.7.16</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.8</version>
     </dependency>
     </dependencies>
 </project>

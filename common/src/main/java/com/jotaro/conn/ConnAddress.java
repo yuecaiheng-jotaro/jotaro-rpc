@@ -1,0 +1,19 @@
+package com.jotaro.conn;
+
+import lombok.Builder;
+import lombok.Data;
+
+/**
+ * @description:
+ * @author: yuecaiheng.jotaro
+ * @date: 2026/10/24 21:43
+ */
+@Data
+@Builder
+public class ConnAddress {
+
+    private String host;
+
+    private int port;
+
+}

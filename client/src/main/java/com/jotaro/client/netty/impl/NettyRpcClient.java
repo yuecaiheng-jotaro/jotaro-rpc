@@ -1,8 +1,9 @@
 package com.jotaro.client.netty.impl;
 
-import com.alibaba.fastjson2.JSON;
 import com.jotaro.pojo.req.RpcRequest;
 import com.jotaro.pojo.resp.RpcResponse;
+import com.jotaro.register.zk.discovery.ServiceCenter;
+import com.jotaro.register.zk.discovery.ZKServiceCenter;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -22,9 +23,7 @@ import com.jotaro.client.RpcClient;
 @Slf4j
 public class NettyRpcClient implements RpcClient {
 
-    private String host;
-
-    private int port;
+    private ServiceCenter serviceCenter;
 
     private static final Bootstrap bootstrap;
 
@@ -39,16 +38,16 @@ public class NettyRpcClient implements RpcClient {
     }
 
     public NettyRpcClient(String host, int port) {
-        this.host = host;
-        this.port = port;
+        this.serviceCenter = new ZKServiceCenter();
     }
 
     @Override
     public RpcResponse sendRequest(final RpcRequest rpcRequest) {
         try {
-            log.info("netty send req:{}",JSON.toJSONString(rpcRequest));
             // 创建channelFuture对象，代表操作事件，sync阻塞到connect完成
-            ChannelFuture channelFuture = bootstrap.connect(host,port).sync();
+            ChannelFuture channelFuture = bootstrap
+                    .connect(this.serviceCenter.serviceDiscovery(rpcRequest.getInterfaceName()))
+                    .sync();
             // 获取channel
             Channel channel = channelFuture.channel();
             // 发送数据；写出失败时主动关连接，避免 closeFuture 永久堵塞
@@ -59,11 +58,9 @@ public class NettyRpcClient implements RpcClient {
                 }
             });
             // 堵塞获取结果
-            log.info("sync...");
             channel.closeFuture().sync();
             AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse");
             RpcResponse rpcResponse = channel.attr(key).get();
-            log.info("req:{}, resp:{}", JSON.toJSONString(rpcRequest), JSON.toJSONString(rpcResponse));
             return rpcResponse;
         }catch (Exception e){
             log.error("nettyClient send error",e);

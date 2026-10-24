@@ -37,7 +37,7 @@ public class NettyRpcClient implements RpcClient {
                 .handler(new NettyClientInitializer());
     }
 
-    public NettyRpcClient(String host, int port) {
+    public NettyRpcClient() {
         this.serviceCenter = new ZKServiceCenter();
     }
 

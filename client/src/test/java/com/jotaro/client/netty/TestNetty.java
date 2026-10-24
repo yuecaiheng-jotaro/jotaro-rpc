@@ -16,7 +16,7 @@ public class TestNetty {
 
     @Test
     public void testNetty(){
-        NettyClientProxy proxy = new NettyClientProxy("127.0.0.1",9999);
+        NettyClientProxy proxy = new NettyClientProxy();
         UserService userService = proxy.getProxy(UserService.class);
         User user = userService.getUserById(1);
         System.out.println("user:{}" + JSON.toJSONString(user));

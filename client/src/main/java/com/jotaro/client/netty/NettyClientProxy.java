@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import lombok.AllArgsConstructor;
 import com.jotaro.client.netty.impl.NettyRpcClient;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -18,16 +19,10 @@ import com.jotaro.client.netty.impl.NettyRpcClient;
 @AllArgsConstructor
 public class NettyClientProxy implements InvocationHandler {
 
-    private String host;
-
-    private Integer port;
-
     private RpcClient ioClient;
 
-    public NettyClientProxy(String host, Integer port) {
-        this.host = host;
-        this.port = port;
-        this.ioClient = new NettyRpcClient(host,port);
+    public NettyClientProxy(){
+        this.ioClient = new NettyRpcClient();
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.jotaro.register.zk.common;
 import java.net.InetSocketAddress;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.lf5.util.StreamUtils;
 
 /**
  * @description:
@@ -31,7 +30,7 @@ public class ZKUtils {
      */
     static public String getServiceInetAddress(InetSocketAddress address){
         if (Objects.nonNull(address)){
-            return String.join(ZKConstants.SPLIT_HOST_PORT_SYMBOL, address.getHostName(),String.valueOf(address.getPort()));
+            return String.join(ZKConstants.SPLIT_HOST_PORT_SYMBOL, address.getHostString(), String.valueOf(address.getPort()));
         }
         return null;
     }

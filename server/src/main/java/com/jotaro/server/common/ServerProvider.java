@@ -1,7 +1,8 @@
 package com.jotaro.server.common;
 
 import com.google.common.collect.Maps;
-import com.jotaro.conn.ConnAddress;
+import com.jotaro.pojo.conn.ConnAddress;
+import com.jotaro.ratelimit.RateLimitProvider;
 import com.jotaro.register.zk.regist.ServicerRegister;
 import com.jotaro.register.zk.regist.impl.ZKServiceRegister;
 import java.net.InetSocketAddress;
@@ -31,6 +32,11 @@ public class ServerProvider {
      */
     private ConnAddress connAddress;
 
+    /**
+     * 限流器
+     */
+    private RateLimitProvider rateLimitProvider;
+
 
     public ServerProvider(String host,int port) {
         this.connAddress = ConnAddress.builder()
@@ -38,6 +44,7 @@ public class ServerProvider {
                 .port(port)
                 .build();
         this.servicerRegister = new ZKServiceRegister();
+        this.rateLimitProvider = new RateLimitProvider();
     }
 
     /**
@@ -56,6 +63,11 @@ public class ServerProvider {
 
     public Object getService(String interfaceName){
         return interfaceProvider.get(interfaceName);
+    }
+
+
+    public RateLimitProvider getRateLimiter(){
+        return this.rateLimitProvider;
     }
 
 }

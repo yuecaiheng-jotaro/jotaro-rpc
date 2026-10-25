@@ -3,6 +3,7 @@ package com.jotaro.server.netty.impl;
 import com.alibaba.fastjson2.JSON;
 import com.jotaro.pojo.req.RpcRequest;
 import com.jotaro.pojo.resp.RpcResponse;
+import com.jotaro.ratelimit.RateLimiter;
 import com.jotaro.server.common.ServerProvider;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -44,6 +45,11 @@ public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcReques
         Method method = null;
         try{
             method = service.getClass().getMethod(rpcRequest.getMethodName(),rpcRequest.getParamsType());
+            RateLimiter rateLimiter = this.serverProvider.getRateLimiter().getRateLimit(interfaceName,method.getName());
+            if (!rateLimiter.getToken()){
+                log.error("ratelimit sevicenName:{}, methodName:{}",interfaceName,method.getName());
+                return RpcResponse.fail("服务限流");
+            }
             Object invoke = method.invoke(service, rpcRequest.getParams());
             return RpcResponse.success(invoke, method.getReturnType());
         }catch (Exception e){

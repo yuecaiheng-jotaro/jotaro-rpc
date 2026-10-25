@@ -1,4 +1,4 @@
-package com.jotaro.conn;
+package com.jotaro.pojo.conn;
 
 import lombok.Builder;
 import lombok.Data;

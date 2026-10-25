@@ -1,9 +1,9 @@
 package com.jotaro.pojo.resp;
 
+import com.jotaro.common.RespCodeEnum;
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
-import sun.awt.SunHints.LCDContrastKey;
 
 /**
  * @description:

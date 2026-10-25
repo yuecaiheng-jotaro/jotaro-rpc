@@ -14,5 +14,10 @@ public class ZKConstants {
 
     public static final String SPLIT_HOST_PORT_SYMBOL = ":";
 
+    // retry路径
+    public static final String RETRY_ROOT = "CanRetry";
+
+    public static final String SERVICE_NAME_METHOD_SPLIT = "#";
+
 
 }

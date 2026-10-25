@@ -1,6 +1,5 @@
 package com.jotaro.client.netty;
 
-import com.jotaro.client.RpcClient;
 import com.jotaro.pojo.req.RpcRequest;
 import com.jotaro.pojo.resp.RpcResponse;
 import java.lang.reflect.InvocationHandler;

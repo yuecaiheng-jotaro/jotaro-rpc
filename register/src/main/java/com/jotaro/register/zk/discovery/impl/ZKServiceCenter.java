@@ -1,10 +1,13 @@
 package com.jotaro.register.zk.discovery.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.jotaro.register.zk.ZKClientFactory;
 import com.jotaro.register.zk.common.constants.ZKConstants;
 import com.jotaro.register.zk.common.utils.ZKUtils;
 import com.jotaro.register.zk.discovery.ServiceCenter;
+import com.jotaro.register.zk.discovery.balance.LoadBalancer;
+import com.jotaro.register.zk.discovery.balance.impl.RoundLoadBalancer;
 import com.jotaro.register.zk.discovery.cache.CacheService;
 import com.jotaro.register.zk.discovery.cache.ZKWatcher;
 import com.jotaro.register.zk.discovery.cache.impl.RawLocalCacheService;
@@ -25,7 +28,11 @@ public class ZKServiceCenter implements ServiceCenter {
     // zk客户端
     private CuratorFramework zkClient;
 
+    // 注册中心缓存
     private CacheService cacheService;
+
+    // 负载均衡器
+    private LoadBalancer loadBalancer;
 
     // 初始化zk的客户端连接
     public ZKServiceCenter() {
@@ -46,6 +53,9 @@ public class ZKServiceCenter implements ServiceCenter {
         this.cacheService = new RawLocalCacheService();
         ZKWatcher watcher = new ZKWatcher(this.zkClient,this.cacheService);
         watcher.watch4Update(ZKConstants.PATH_SPLIT_SYMBOL);
+
+        // 初始化负载均衡器
+        this.loadBalancer = new RoundLoadBalancer();
     }
 
     @Override
@@ -60,7 +70,7 @@ public class ZKServiceCenter implements ServiceCenter {
                 log.error("ZKServiceCenter.serviceDiscovery empty, serviceName:{}", serviceName);
                 return null;
             }
-            return parseAddress(serviceNodesStr.get(0));
+            return parseAddress(this.loadBalancer.balance(serviceNodesStr));
 
         }catch (Exception e){
             log.error("ZKServiceCenter.serviceDiscovery, serviceName:{}",serviceName,e);

@@ -13,7 +13,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
-import com.jotaro.client.RpcClient;
+import com.jotaro.client.netty.RpcClient;
 
 /**
  * @description: netty rpc客户端
@@ -66,5 +66,10 @@ public class NettyRpcClient implements RpcClient {
             log.error("nettyClient send error",e);
             return RpcResponse.fail("发送异常");
         }
+    }
+
+    @Override
+    public RpcResponse sendResuestRetry(final RpcRequest rpcRequest) {
+        return null;
     }
 }

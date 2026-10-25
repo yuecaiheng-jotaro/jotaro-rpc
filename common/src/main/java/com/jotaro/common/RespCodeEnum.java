@@ -1,4 +1,4 @@
-package com.jotaro.pojo.resp;
+package com.jotaro.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

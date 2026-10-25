@@ -1,11 +1,10 @@
 package com.jotaro.serializer;
 
 import com.jotaro.common.MsgTypeEnum;
-import com.jotaro.common.Type2SSerializer;
+import com.jotaro.common.Type2SSerializerEnum;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
-import io.netty.handler.codec.MessageToMessageDecoder;
 import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +26,7 @@ public class JotaroDecoder extends ByteToMessageDecoder {
             return;
         }
         short serializerType = in.readShort();
-        Serializer serializer = Type2SSerializer.getSerializerByType(serializerType);
+        Serializer serializer = Type2SSerializerEnum.getSerializerByType(serializerType);
         if (Objects.isNull(serializer)){
             log.error("[decoder] not support serializer, type:{}",serializerType);
             return;

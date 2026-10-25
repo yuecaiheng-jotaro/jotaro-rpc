@@ -14,7 +14,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum Type2SSerializer {
+public enum Type2SSerializerEnum {
 
     JAVA_RAW_SERIALIZER(0, ObjectSerializer.class),
 
@@ -26,9 +26,9 @@ public enum Type2SSerializer {
     private final Class<?> serializer;
 
     public static Serializer getSerializerByType(int type) throws InstantiationException, IllegalAccessException {
-        for (Type2SSerializer type2SSerializer : Type2SSerializer.values()){
-            if (Objects.equals(type2SSerializer.getType(),type)){
-                return (Serializer) type2SSerializer.getSerializer().newInstance();
+        for (Type2SSerializerEnum type2SSerializerEnum : Type2SSerializerEnum.values()){
+            if (Objects.equals(type2SSerializerEnum.getType(),type)){
+                return (Serializer) type2SSerializerEnum.getSerializer().newInstance();
             }
         }
         return null;

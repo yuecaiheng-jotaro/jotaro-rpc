@@ -2,8 +2,12 @@ package com.jotaro.register.zk.discovery.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.jotaro.register.zk.ZKClientFactory;
-import com.jotaro.register.zk.common.ZKUtils;
+import com.jotaro.register.zk.common.constants.ZKConstants;
+import com.jotaro.register.zk.common.utils.ZKUtils;
 import com.jotaro.register.zk.discovery.ServiceCenter;
+import com.jotaro.register.zk.discovery.cache.CacheService;
+import com.jotaro.register.zk.discovery.cache.ZKWatcher;
+import com.jotaro.register.zk.discovery.cache.impl.RawLocalCacheService;
 import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,9 +25,12 @@ public class ZKServiceCenter implements ServiceCenter {
     // zk客户端
     private CuratorFramework zkClient;
 
+    private CacheService cacheService;
+
     // 初始化zk的客户端连接
     public ZKServiceCenter() {
-        this.zkClient = ZKClientFactory.getZkClient();
+        // 初始化zk链接
+        this.zkClient = ZKClientFactory.buildZkClient();
         this.zkClient.start();
         try {
             if (!this.zkClient.blockUntilConnected(15, TimeUnit.SECONDS)) {
@@ -34,14 +41,21 @@ public class ZKServiceCenter implements ServiceCenter {
             throw new IllegalStateException("zk discovery client connect interrupted", e);
         }
         log.info("discovery zkClient connect success!");
+
+        // 初始化监听器和缓存
+        this.cacheService = new RawLocalCacheService();
+        ZKWatcher watcher = new ZKWatcher(this.zkClient,this.cacheService);
+        watcher.watch4Update(ZKConstants.PATH_SPLIT_SYMBOL);
     }
 
     @Override
     public InetSocketAddress serviceDiscovery(final String serviceName) {
         try {
             // 获取服务提供的节点字符串ip:port（namespace 下路径与注册侧保持一致）
-            List<String> serviceNodesStr = this.zkClient.getChildren()
-                    .forPath(ZKUtils.getZkPathByServiceName(serviceName));
+            List<String> serviceNodesStr = cacheService.getServiceFromCache(serviceName);
+            if (CollectionUtil.isEmpty(serviceNodesStr)){
+                serviceNodesStr = this.zkClient.getChildren().forPath(ZKUtils.getZkPathByServiceName(serviceName));
+            }
             if (CollectionUtil.isEmpty(serviceNodesStr)) {
                 log.error("ZKServiceCenter.serviceDiscovery empty, serviceName:{}", serviceName);
                 return null;

@@ -1,7 +1,6 @@
 package com.jotaro.server;
 
 import com.jotaro.api.UserService;
-import com.jotaro.api.UserServiceImpl;
 import com.jotaro.server.common.ServerProvider;
 import com.jotaro.server.netty.impl.NettyRpcServer;
 import org.junit.Test;

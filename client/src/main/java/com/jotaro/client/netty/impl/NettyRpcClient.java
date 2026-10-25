@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.jotaro.client.RpcClient;
 
 /**
- * @description:
+ * @description: netty rpc客户端
  * @author: yuecaiheng.jotaro
  * @date: 2026/10/23 01:32
  */

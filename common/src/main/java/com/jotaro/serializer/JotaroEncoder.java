@@ -30,7 +30,7 @@ public class JotaroEncoder extends MessageToByteEncoder {
         }
         out.writeShort(serializer.getSerializeType());
         byte[] bytes = serializer.serialize(msg);
-        out.writeInt(Integer.valueOf(bytes.length));
+        out.writeInt(bytes.length);
         out.writeBytes(bytes);
     }
 }

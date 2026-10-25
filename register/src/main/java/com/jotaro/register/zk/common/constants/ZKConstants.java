@@ -1,4 +1,4 @@
-package com.jotaro.register.zk.common;
+package com.jotaro.register.zk.common.constants;
 
 /**
  * @description:

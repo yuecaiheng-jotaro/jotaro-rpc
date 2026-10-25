@@ -1,5 +1,6 @@
-package com.jotaro.register.zk.common;
+package com.jotaro.register.zk.common.utils;
 
+import com.jotaro.register.zk.common.constants.ZKConstants;
 import java.net.InetSocketAddress;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;

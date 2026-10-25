@@ -1,6 +1,6 @@
 package com.jotaro.register.zk;
 
-import com.jotaro.register.zk.common.ZKConstants;
+import com.jotaro.register.zk.common.constants.ZKConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -14,7 +14,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 @Slf4j
 public class ZKClientFactory {
 
-    static public CuratorFramework getZkClient(){
+    static public CuratorFramework buildZkClient(){
         // 可通过 -Djrpc.zk.connectString=host:port 覆盖，默认本机 ZK
         String connectString = System.getProperty("jrpc.zk.connectString", "10.211.55.6:2181");
         CuratorFramework zkClient = CuratorFrameworkFactory.builder()

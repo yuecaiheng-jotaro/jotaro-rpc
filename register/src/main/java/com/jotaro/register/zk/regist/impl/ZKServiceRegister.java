@@ -2,8 +2,8 @@ package com.jotaro.register.zk.regist.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.jotaro.register.zk.ZKClientFactory;
-import com.jotaro.register.zk.common.ZKConstants;
-import com.jotaro.register.zk.common.ZKUtils;
+import com.jotaro.register.zk.common.constants.ZKConstants;
+import com.jotaro.register.zk.common.utils.ZKUtils;
 import com.jotaro.register.zk.regist.ServicerRegister;
 import java.net.InetSocketAddress;
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class ZKServiceRegister implements ServicerRegister {
     private CuratorFramework zkClient;
 
     public ZKServiceRegister() {
-        this.zkClient = ZKClientFactory.getZkClient();
+        this.zkClient = ZKClientFactory.buildZkClient();
         this.zkClient.start();
         try {
             if (!this.zkClient.blockUntilConnected(15, TimeUnit.SECONDS)) {

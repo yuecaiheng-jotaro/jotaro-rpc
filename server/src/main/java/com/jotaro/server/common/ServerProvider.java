@@ -3,7 +3,7 @@ package com.jotaro.server.common;
 import com.google.common.collect.Maps;
 import com.jotaro.conn.ConnAddress;
 import com.jotaro.register.zk.regist.ServicerRegister;
-import com.jotaro.register.zk.regist.ZKServiceRegister;
+import com.jotaro.register.zk.regist.impl.ZKServiceRegister;
 import java.net.InetSocketAddress;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;

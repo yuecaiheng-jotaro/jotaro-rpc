@@ -7,6 +7,6 @@ package com.jotaro.api;
  */
 public interface UserService {
 
-    User getUserById(int id);
+    User getUserById(Integer id);
 
 }

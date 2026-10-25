@@ -1,9 +1,10 @@
-package com.jotaro.register.zk.regist;
+package com.jotaro.register.zk.regist.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.jotaro.register.zk.ZKClientFactory;
 import com.jotaro.register.zk.common.ZKConstants;
 import com.jotaro.register.zk.common.ZKUtils;
+import com.jotaro.register.zk.regist.ServicerRegister;
 import java.net.InetSocketAddress;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,7 @@ import org.apache.zookeeper.CreateMode;
  * @date: 2026/10/24 21:11
  */
 @Slf4j
-public class ZKServiceRegister implements ServicerRegister{
+public class ZKServiceRegister implements ServicerRegister {
 
     private CuratorFramework zkClient;
 

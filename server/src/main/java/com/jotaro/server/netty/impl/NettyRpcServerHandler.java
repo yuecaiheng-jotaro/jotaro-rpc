@@ -45,7 +45,7 @@ public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcReques
         try{
             method = service.getClass().getMethod(rpcRequest.getMethodName(),rpcRequest.getParamsType());
             Object invoke = method.invoke(service, rpcRequest.getParams());
-            return RpcResponse.success(invoke);
+            return RpcResponse.success(invoke, method.getReturnType());
         }catch (Exception e){
             log.error("WorkThread.getResponse error, rpcRequest:{}", JSON.toJSONString(rpcRequest),e);
             return RpcResponse.fail("服务端异常");

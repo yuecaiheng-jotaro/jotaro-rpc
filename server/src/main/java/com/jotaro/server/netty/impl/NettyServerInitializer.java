@@ -1,5 +1,8 @@
 package com.jotaro.server.netty.impl;
 
+import com.jotaro.serializer.JotaroDecoder;
+import com.jotaro.serializer.JotaroEncoder;
+import com.jotaro.serializer.impl.JsonSerializer;
 import com.jotaro.server.common.ServerProvider;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -32,13 +35,8 @@ public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
                 4
         ));
         pipeline.addLast(new LengthFieldPrepender(4));
-        pipeline.addLast(new ObjectEncoder());
-        pipeline.addLast(new ObjectDecoder(new ClassResolver() {
-            @Override
-            public Class<?> resolve(final String className) throws ClassNotFoundException {
-                return Class.forName(className);
-            }
-        }));
+        pipeline.addLast(new JotaroEncoder(new JsonSerializer()));
+        pipeline.addLast(new JotaroDecoder());
         pipeline.addLast(new NettyRpcServerHandler(serverProvider));
     }
 }

@@ -3,7 +3,7 @@ package com.jotaro.client.netty.impl;
 import com.jotaro.pojo.req.RpcRequest;
 import com.jotaro.pojo.resp.RpcResponse;
 import com.jotaro.register.zk.discovery.ServiceCenter;
-import com.jotaro.register.zk.discovery.ZKServiceCenter;
+import com.jotaro.register.zk.discovery.impl.ZKServiceCenter;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;

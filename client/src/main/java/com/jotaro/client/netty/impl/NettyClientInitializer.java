@@ -1,5 +1,8 @@
 package com.jotaro.client.netty.impl;
 
+import com.jotaro.serializer.JotaroDecoder;
+import com.jotaro.serializer.JotaroEncoder;
+import com.jotaro.serializer.impl.JsonSerializer;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -41,14 +44,9 @@ public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
         // 计算当前待发送消息的长度，写入到前4个字节
         pipeline.addLast(new LengthFieldPrepender(4));
         // 编码器，数据进行序列化
-        pipeline.addLast(new ObjectEncoder());
+        pipeline.addLast(new JotaroEncoder(new JsonSerializer()));
         // 解码器, 传入ClassResolver，解析类名并加载对应的类
-        pipeline.addLast(new ObjectDecoder(new ClassResolver() {
-            @Override
-            public Class<?> resolve(final String className) throws ClassNotFoundException {
-                return Class.forName(className);
-            }
-        }));
+        pipeline.addLast(new JotaroDecoder());
         pipeline.addLast(new NettyClientHandler());
 
     }

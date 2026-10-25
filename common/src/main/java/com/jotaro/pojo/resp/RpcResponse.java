@@ -3,6 +3,7 @@ package com.jotaro.pojo.resp;
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
+import sun.awt.SunHints.LCDContrastKey;
 
 /**
  * @description:
@@ -21,6 +22,8 @@ public class RpcResponse implements Serializable {
 
     private Object data;
 
+    private Class<?> dataType;
+
     /**
      * success
      * @param data
@@ -30,6 +33,19 @@ public class RpcResponse implements Serializable {
         return RpcResponse.builder()
                 .code(RespCodeEnum.SUCCESS.getCode())
                 .data(data)
+                .build();
+    }
+
+    /**
+     * success
+     * @param data
+     * @return
+     */
+    public static RpcResponse success(Object data, Class<?> dataType){
+        return RpcResponse.builder()
+                .code(RespCodeEnum.SUCCESS.getCode())
+                .data(data)
+                .dataType(dataType)
                 .build();
     }
 

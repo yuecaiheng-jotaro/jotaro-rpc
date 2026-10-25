@@ -8,7 +8,7 @@ package com.jotaro.api;
 public class UserServiceImpl implements UserService{
 
     @Override
-    public User getUserById(final int id) {
+    public User getUserById(final Integer id) {
         return User.builder().id(1).name("test").build();
     }
 }

@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import lombok.AllArgsConstructor;
 import com.jotaro.client.netty.impl.NettyRpcClient;
-import lombok.NoArgsConstructor;
 
 
 /**

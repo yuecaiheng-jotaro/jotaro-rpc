@@ -16,6 +16,12 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
  */
 public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
 
+    /**
+     * 初始化pipeline，实际pipeline执行数据加工的时候根据实现的接口是ChannelInboundHandler还是ChannelOutboundHandler调用具体的handler
+     * 其中：实现ChannelOutboundHandler的是出站handle方式，实现ChannelInboundHandler的是入站的handler方式
+     * @param ch            the {@link Channel} which was registered.
+     * @throws Exception
+     */
     @Override
     protected void initChannel(final SocketChannel ch) throws Exception {
         // 初始化，每个SocketChannel有一个独立的pipeline，用于定义数据的处理流程

@@ -1,7 +1,11 @@
 package com.jotaro.register.zk;
 
 import com.jotaro.register.zk.common.constants.ZKConstants;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -14,9 +18,15 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 @Slf4j
 public class ZKClientFactory {
 
+    private static final String ZK_CONFIG_FILE = "zk.propertis";
+
+    private static final String ZK_ADDRESS_KEY = "jrpc.zk.address";
+
+    private static final String DEFAULT_ZK_ADDRESS = "localhost:2181";
+
     static public CuratorFramework buildZkClient(){
-        // 可通过 -Djrpc.zk.connectString=host:port 覆盖，默认本机 ZK
-        String connectString = System.getProperty("jrpc.zk.connectString", "10.211.55.6:2181");
+        String connectString = loadZkAddress();
+        log.info("zk connectString:{}", connectString);
         CuratorFramework zkClient = CuratorFrameworkFactory.builder()
                 // 与zk建立连接
                 .connectString(connectString)
@@ -29,6 +39,31 @@ public class ZKClientFactory {
                 .namespace(ZKConstants.ROOT_PATH)
                 .build();
         return zkClient;
+    }
+
+    /**
+     * 加载zk配置文件
+     * @return
+     */
+    private static String loadZkAddress() {
+        Properties properties = new Properties();
+        try (InputStream inputStream = ZKClientFactory.class.getClassLoader()
+                .getResourceAsStream(ZK_CONFIG_FILE)) {
+            if (inputStream == null) {
+                log.warn("zk config {} not found on classpath, fallback to {}", ZK_CONFIG_FILE, DEFAULT_ZK_ADDRESS);
+                return DEFAULT_ZK_ADDRESS;
+            }
+            properties.load(inputStream);
+            String address = properties.getProperty(ZK_ADDRESS_KEY);
+            if (StringUtils.isBlank(address)) {
+                log.warn("zk address key {} is blank, fallback to {}", ZK_ADDRESS_KEY, DEFAULT_ZK_ADDRESS);
+                return DEFAULT_ZK_ADDRESS;
+            }
+            return address.trim();
+        } catch (IOException e) {
+            log.error("load zk config {} failed, fallback to {}", ZK_CONFIG_FILE, DEFAULT_ZK_ADDRESS, e);
+            return DEFAULT_ZK_ADDRESS;
+        }
     }
 
 }

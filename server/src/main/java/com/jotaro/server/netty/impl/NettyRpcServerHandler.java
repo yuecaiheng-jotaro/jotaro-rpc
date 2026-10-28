@@ -20,7 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @AllArgsConstructor
 public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
+
     private ServerProvider serverProvider;
+
     @Override
     protected void channelRead0(final ChannelHandlerContext ctx, final RpcRequest rpcRequest) throws Exception {
         RpcResponse rpcResponse = getResponse(rpcRequest);

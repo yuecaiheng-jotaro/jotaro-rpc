@@ -5,7 +5,7 @@ import com.jotaro.ratelimit.impl.TokenBucketRateLimitImpl;
 import java.util.Map;
 
 /**
- * @description:
+ * @description: 限流provider
  * @author: yuecaiheng.jotaro
  * @date: 2026/10/26 01:39
  */

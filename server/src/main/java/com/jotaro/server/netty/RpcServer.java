@@ -1,4 +1,4 @@
-package com.jotaro.server;
+package com.jotaro.server.netty;
 
 /**
  * @description: rpc服务端

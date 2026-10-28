@@ -1,7 +1,7 @@
 package com.jotaro.ratelimit;
 
 /**
- * @description:
+ * @description: 服务限流接口
  * @author: yuecaiheng.jotaro
  * @date: 2026/10/26 01:28
  */

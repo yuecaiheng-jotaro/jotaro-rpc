@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.jd.order.idea.plugin.ducc.DuccProjectSettings">
+    <option name="lastConfigCode" value="intercept" />
+    <option name="lastConfigId" value="21226" />
+    <option name="lastNsCode" value="b_account" />
+    <option name="lastNsId" value="6151" />
+    <option name="lastProfileCode" value="product" />
+    <option name="lastProfileId" value="39496" />
+    <option name="namespaceMappings">
+      <list>
+        <NamespaceMapping>
+          <option name="nsCode" value="b_account" />
+          <option name="nsId" value="6151" />
+          <option name="nsName" value="B账号中心系统" />
+        </NamespaceMapping>
+      </list>
+    </option>
+  </component>
+</project>

@@ -3,7 +3,7 @@ package com.jotaro.ratelimit.impl;
 import com.jotaro.ratelimit.RateLimiter;
 
 /**
- * @description:
+ * @description: 令牌桶限流器
  * @author: yuecaiheng.jotaro
  * @date: 2026/10/26 01:30
  */

@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * @description:
+ * @description: ip:port包装类
  * @author: yuecaiheng.jotaro
  * @date: 2026/10/24 21:43
  */
